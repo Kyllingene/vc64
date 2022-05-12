@@ -20,9 +20,5 @@ However, the hope is for these features to be implemented by the end:
 The current implementation is  ~100 lines and easy to read, so documentation would be superfluous at this stage. However, `src/main.asm` holds an example program to familiarize you with the concepts.
 
 ### Building
-Make sure you have Rust installed. Clone the repository once per game, then `cd` into the folder and run:
-```sh
-cargo build
-```
-
+Make sure you have Rust installed. Clone the repository once per game, then `cd` into the folder and run `cargo build`.
 This will produce a standalone executable in `target/debug/`. That is your game.
