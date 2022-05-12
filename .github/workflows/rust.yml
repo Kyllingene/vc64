@@ -21,6 +21,6 @@ jobs:
     - name: Download NASM
       run: sudo apt-get install nasm
     - name: Fmt
-      run: cargo fmt --verbose
+      run: cargo fmt --check --verbose
     - name: Build
       run: cargo build --verbose
