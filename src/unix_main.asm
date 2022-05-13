@@ -76,18 +76,19 @@ move_right:
 	add qword [PX], 1
 	
 draw_player:
-	mov rdi, [PX]
-	mov rsi, [PY]
-	mov rdx, 10
-	mov rcx, [GREEN]
-	call _draw_square
-	
 	mov rdi, 10
 	mov rsi, 20
 	mov rdx, 50
 	mov rcx, 30
 	mov r8, [BLUE]
 	call _draw_rect
+	
+	mov rdi, [PX]
+	mov rsi, [PY]
+	mov rdx, 10
+	mov rcx, [GREEN]
+	call _draw_square
+	
 	
 	mov rsp, rbp
 	pop rbp
