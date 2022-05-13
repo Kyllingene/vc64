@@ -2,9 +2,15 @@ name: Rust
 
 on:
   push:
-    branches: [ master ]
+    paths:
+      - 'src/main.rs'
+      - 'src/windows_main.asm'
+      - 'src/unix_main.asm'
   pull_request:
-    branches: [ master ]
+    paths:
+      - 'src/main.rs'
+      - 'src/windows_main.asm'
+      - 'src/unix_main.asm'
 
 env:
   CARGO_TERM_COLOR: always
