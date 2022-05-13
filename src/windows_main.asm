@@ -34,10 +34,7 @@ extern _key_down    ; k
 
 global update
 
-update:
-	push rbp
-	mov rbp, rsp
-	
+update:	
 	mov rcx, [GRAY]
 	call _clear
 	
@@ -90,6 +87,4 @@ draw_player:
 	mov r9, [GREEN]
 	call _draw_square
 	
-	mov rsp, rbp
-	pop rbp
 	ret
