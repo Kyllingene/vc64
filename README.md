@@ -27,4 +27,4 @@ This will produce a standalone executable in `target/debug/`. That is your game.
 
 #### Windows
 Make sure you have Rust and Visual Studio installed, along with VS' C++ tools. Then you can run `cargo build` as usual.
-A common indicator that you Windows assembly source is using the wrong calling convention is if it immediately panics with the text "Invalid key code: <some number>".
+A common indicator that your Windows assembly source is using the wrong calling convention is if it immediately panics with the text "Invalid key code: <some number>".
