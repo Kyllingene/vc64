@@ -1,4 +1,7 @@
 section .data
+; sprites (i used the sprite editor from http://johnearnest.github.io/Octo/index.html)
+PLAYER: db 0x3F, 0xFC, 0x7F, 0xFE, 0xF0, 0x0F, 0xE0, 0x07, 0xE0, 0x07, 0xC4, 0x23, 0xC4, 0x23, 0xC0, 0x03, 0xC0, 0x03, 0xC8, 0x13, 0xC7, 0xE3, 0xE0, 0x07, 0xE0, 0x07, 0xF0, 0x0F, 0x7F, 0xFE, 0x3F, 0xFC
+
 ; colors
 BLACK:    dq 0x0
 WHITE:    dq 0x1
@@ -29,6 +32,7 @@ default rel
 ; declare all functions here
 extern _draw_square ; x, y, w, c
 extern _draw_rect   ; x, y, w, h, c
+extern _draw_sprite ; x, y, *s
 extern _clear       ; c
 extern _key_down    ; k
 
@@ -85,10 +89,8 @@ draw_player:
 	
 	mov rdi, [PX]
 	mov rsi, [PY]
-	mov rdx, 10
-	mov rcx, [GREEN]
-	call _draw_square
-	
+	lea rdx, [PLAYER]
+	call _draw_sprite
 	
 	mov rsp, rbp
 	pop rbp

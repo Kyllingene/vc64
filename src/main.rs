@@ -1,4 +1,6 @@
 use macroquad::prelude::*;
+use bit_array::BitArray;
+use typenum::U8;
 
 // <platform>_main.asm must implement all of these functions
 #[cfg(unix)]
@@ -66,10 +68,49 @@ pub extern "C" fn _draw_rect(x: u64, y: u64, w: u64, h: u64, c: u64) {
     draw_rectangle(x as f32, y as f32, w as f32, h as f32, color);
 }
 
+#[no_mangle]
+pub extern "C" fn _draw_px(x: u64, y: u64, p: bool) {
+	let c = match p {
+		true  => BLACK,
+		false => LIGHTGRAY
+	};
+	
+	draw_rectangle(x as f32, y as f32, 4.0, 4.0, c);
+}
+
+fn draw_u8(x: u64, y: u64, u: u8) {
+	let bv = BitArray::<u16, U8>::from_bytes(&[u]);
+	
+	let mut px = x;
+	for p in bv.iter() {
+		_draw_px(px, y, p);
+		
+		px += 4;
+	}
+}
+
+#[no_mangle]
+pub extern "C" fn _draw_sprite(x: u64, y: u64, s: *mut [u8; 32]) {
+	let sprite = unsafe {<*mut [u8; 32]>::as_ref(s)}.unwrap().to_vec(); // turns the pointer to an array into a vec
+	
+	let mut p = 0;
+	let mut py: u64 = y;
+	for u in &sprite {
+		draw_u8(x, py, *u);
+		p += 1;
+		if p == 2 {
+			p = 0;
+			py += 4;
+		}
+	}
+}
+
+
+
 #[macroquad::main("vc64")]
 async fn main() {
     loop {
-        let mut dt = get_frame_time() as f64;
+        let dt = get_frame_time() as f64;
 
         unsafe {
             update(dt);
