@@ -69,8 +69,8 @@ pub extern "C" fn _draw_rect(x: u64, y: u64, w: u64, h: u64, c: u64) {
 #[macroquad::main("vc64")]
 async fn main() {
     loop {
-		let mut dt = get_frame_time() as f64;
-		
+        let mut dt = get_frame_time() as f64;
+
         unsafe {
             update(dt);
         }
