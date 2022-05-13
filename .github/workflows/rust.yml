@@ -6,11 +6,13 @@ on:
       - 'src/main.rs'
       - 'src/windows_main.asm'
       - 'src/unix_main.asm'
+      - 'build.rs'
   pull_request:
     paths:
       - 'src/main.rs'
       - 'src/windows_main.asm'
       - 'src/unix_main.asm'
+      - 'build.rs'
 
 env:
   CARGO_TERM_COLOR: always
