@@ -1,7 +1,7 @@
 # vc64
 
 ## Description
-*vc64* is a just-for-fun project made in Rust. It uses macroquad to make a cross-platform\* virtual console of sorts that you program in x86-64 assembly.
+*vc64* is a just-for-fun project made in Rust. It uses [macroquad](https://crates.io/crates/macroquad) to make a cross-platform virtual console of sorts that you program in x86-64 assembly.
 In it's current state, it only supports the following features:
  - 7 colors
  - clear the screen
@@ -14,11 +14,17 @@ However, the hope is for these features to be implemented by the end:
  - Dynamically-linked object files instead of only statically-linked files
  - TBD
 
-###### \*: currently only supports Unix or WSL. WSL is great, install it. Any help on native Windows support would be welcome.
-
 ## Usage
 The current implementation is  ~100 lines and easy to read, so documentation would be superfluous at this stage. However, `src/main.asm` holds an example program to familiarize you with the concepts.
 
+There are two assembly source files: `src/windows_main.asm` and `src/unix_main.asm`. This is necessary since Windows and Unix use different calling conventions.
+The build script will automatically assemble the correct source file for your target OS, but you must manually tranlate between the two.
+
 ### Building
+#### Unix
 Make sure you have Rust installed. Clone the repository once per game, then `cd` into the folder and run `cargo build`.
 This will produce a standalone executable in `target/debug/`. That is your game.
+
+#### Windows
+Make sure you have Rust and Visual Studio installed, along with VS' C++ tools. Then you can run `cargo build` as usual.
+A common indicator that you Windows assembly source is using the wrong calling convention is if it immediately panics with the text "Invalid key code: <some number>".

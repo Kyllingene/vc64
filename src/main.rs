@@ -1,7 +1,14 @@
 use macroquad::prelude::*;
 
-// asm_main.asm must implement all of these
-#[link(name = "asm_main")]
+// <platform>_main.asm must implement all of these functions
+#[cfg(unix)]
+#[link(name = "unix_main")]
+extern "C" {
+    fn update();
+}
+
+#[cfg(windows)]
+#[link(name = "windows_main")]
 extern "C" {
     fn update();
 }
