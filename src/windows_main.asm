@@ -1,4 +1,7 @@
 section .data
+; sprites (i used the sprite editor from http://johnearnest.github.io/Octo/index.html)
+PLAYER: db 0x3F, 0xFC, 0x7F, 0xFE, 0xF0, 0x0F, 0xE0, 0x07, 0xE0, 0x07, 0xC4, 0x23, 0xC4, 0x23, 0xC0, 0x03, 0xC0, 0x03, 0xC8, 0x13, 0xC7, 0xE3, 0xE0, 0x07, 0xE0, 0x07, 0xF0, 0x0F, 0x7F, 0xFE, 0x3F, 0xFC
+
 ; colors
 BLACK:    dq 0x0
 WHITE:    dq 0x1
@@ -29,6 +32,7 @@ default rel
 ; declare all functions here
 extern _draw_square ; x, y, w, c
 extern _draw_rect   ; x, y, w, h, c
+extern _draw_sprite ; x, y, *s
 extern _clear       ; c
 extern _key_down    ; k
 
@@ -73,18 +77,33 @@ move_right:
 	add qword [PX], 1
 	
 draw_player:
-	mov rcx, 10
+	cmp qword [PX], 0
+	je fix_x
+	jmp check_y
+	
+fix_x:
+	mov qword [PX], 1
+	
+check_y:
+	cmp qword [PY], 0
+	je fix_y
+	jmp coordinates_fixed
+
+fix_y:
+	mov qword [PY], 1
+
+coordinates_fixed:
+	mov rcx, 12
 	mov rdx, 20
-	mov r8, 50
-	mov r9, 30
+	mov r8, 52
+	mov r9, 40
 	push qword [BLUE]
 	sub rsp, 24
 	call _draw_rect
 	
 	mov rcx, [PX]
 	mov rdx, [PY]
-	mov r8, 10
-	mov r9, [GREEN]
-	call _draw_square
+	lea r8, [PLAYER]
+	call _draw_sprite
 	
 	ret

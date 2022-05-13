@@ -80,10 +80,26 @@ move_right:
 	add qword [PX], 1
 	
 draw_player:
-	mov rdi, 10
+	cmp qword [PX], 0
+	je fix_x
+	jmp check_y
+	
+fix_x:
+	mov qword [PX], 1
+	
+check_y:
+	cmp qword [PY], 0
+	je fix_y
+	jmp coordinates_fixed
+
+fix_y:
+	mov qword [PY], 1
+
+coordinates_fixed:
+	mov rdi, 12
 	mov rsi, 20
-	mov rdx, 50
-	mov rcx, 30
+	mov rdx, 52
+	mov rcx, 40
 	mov r8, [BLUE]
 	call _draw_rect
 	
