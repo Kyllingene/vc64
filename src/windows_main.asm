@@ -38,7 +38,10 @@ extern _key_down    ; k
 
 global update
 
-update:	
+update:
+	push rbp
+	mov rbp, rsp
+	
 	mov rcx, [GRAY]
 	call _clear
 	
@@ -106,4 +109,6 @@ coordinates_fixed:
 	lea r8, [PLAYER]
 	call _draw_sprite
 	
+	mov rsp, rbp
+	pop rbp
 	ret
