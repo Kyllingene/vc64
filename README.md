@@ -1,7 +1,7 @@
 # vc64
 
 ## Description
-*vc64* is a just-for-fun project made in Rust. It uses [macroquad](https://crates.io/crates/macroquad) to make a cross-platform virtual console of sorts that you program in x86-64 assembly.
+*vc64* is a just-for-fun project made in Rust. It uses [macroquad](https://crates.io/crates/macroquad) to make a cross-platform virtual console of sorts that you program in (NASM) x86-64 assembly.
 In it's current state, it only supports the following features:
  - 7 colors
  - clear the screen
@@ -19,6 +19,7 @@ The current implementation is  ~100 lines and easy to read, so documentation wou
 
 There are two assembly source files: `src/windows_main.asm` and `src/unix_main.asm`. This is necessary since Windows and Unix use different calling conventions.
 The build script will automatically assemble the correct source file for your target OS, but you must manually tranlate between the two.
+***To build, you MUST have `nasm` in your path!***
 
 ### Building
 #### Unix
