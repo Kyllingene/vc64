@@ -3,15 +3,16 @@ use std::env;
 
 fn main() {
     if env::var("CARGO_CFG_TARGET_FAMILY").unwrap() == "unix" {
-        if let Err(e) = nasm_rs::compile_library_args("libunix_main.a", &["src/unix_main.asm"], &["-f elf64"]) {
+		if let Err(e) = nasm_rs::compile_library_args("libunix_main.a", &["src/unix_main.asm"], &["-Psrc/sprites.inc", "-f elf64"]) {
 			// TODO: add better error handling
-			panic!(e);
+			panic!("{}", e);
 		}
+		
     } else {
-        println!("cargo:rustc-link-lib=static=windows_main");
-        if let Err(e) = nasm_rs::compile_library_args("windows_main.lib", &["src/windows_main.asm"], &["-f win64"]) {
+		println!("cargo:rustc-link-lib=static=windows_main");
+        if let Err(e) = nasm_rs::compile_library_args("windows_main.lib", &["src/windows_main.asm"], &["-Psrc/sprites.inc", "-f win64"]) {
 			// TODO: add better error handling
-			panic!(e);
+			panic!("{}", e);
 		}
     }
 }

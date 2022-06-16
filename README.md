@@ -7,6 +7,7 @@ In it's current state, it only supports the following features:
  - clear the screen
  - get state of 9 keys
  - draw rectangles (currently uses `u64` instead of `f32`, so poor precision)
+ - basic sprite drawing
  
 However, the hope is for these features to be implemented by the end:
  - 16x16 sprite table (written in `src/sprites.asm`)
