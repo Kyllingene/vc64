@@ -28,7 +28,5 @@ jobs:
       run: sudo apt-get install pkg-config libx11-dev libxi-dev libgl1-mesa-dev libasound2-dev
     - name: Download NASM
       run: sudo apt-get install nasm
-    - name: Fmt
-      run: cargo fmt --check --verbose
     - name: Build
       run: cargo build --verbose
